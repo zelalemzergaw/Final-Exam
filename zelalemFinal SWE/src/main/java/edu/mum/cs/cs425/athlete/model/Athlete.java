@@ -19,11 +19,11 @@ public class Athlete {
     private String fullName;
 
 
-    @NotBlank(message = "name is required")
+
     private String emailAddress;
 
 
-    @NotBlank(message = "phone number is required ")
+
     private String phoneNumber;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
@@ -36,6 +36,7 @@ public class Athlete {
     @NotNull(message = "model number is required")
     @Digits(integer = 9, fraction = 0, message = "* SSN number must be numeric; and a positive, integral value")
     private Integer totalNumberOfModelsWon;
+
 
     @NotNull(message = "* SSN Number is required")
     @Digits(integer = 9, fraction = 0, message = "* SSN number must be numeric; and a positive, integral value")
