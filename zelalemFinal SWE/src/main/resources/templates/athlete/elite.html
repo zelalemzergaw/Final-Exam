@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="author" content="O. Kalu">
+    <link rel="icon" href="favicon.ico">
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.2/cerulean/bootstrap.min.css" rel="stylesheet" integrity="sha384-EmRcsPP774S9MOi4ywB+JXUWjYnBdyInMzG2XsC5siZEUpexqxOMJW358dCYEjPu" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/master.css}">
+    <title>eAthlete - a demo spring boot webapp featuring CRUD - List eAthlete</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a style="padding-right: 2em;" class="navbar-brand" href="/eAthlete/home">eAthlete : : : a CRUD demo webapp</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item" style="border-left: white 1px solid; padding-left: 2em; padding-right: 2em;">
+                <a class="nav-link" href="/eAthlete/athlete/list">Athletes</a>
+            </li>
+            <li class="nav-item" style="border-left: white 1px solid; padding-left: 2em; padding-right: 2em;">
+                <a class="nav-link" href="/eAthlete/athlete/elite">Elite Athletes </a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <span style="color:#fff;padding-left: 2em; padding-right: 1em;">Welcome, Guest</span>
+            <!--<a style="color: #ffffff; margin-right: 0em;" class="nav-link" href="#">John Doe</a>-->
+            <!--<input class="form-control mr-sm-2" type="text" placeholder="Search">-->
+            <a href="#" class="btn btn-secondary">Sign In</a>
+        </form>
+    </div>
+</nav>
+
+<div style="margin-top:1em;margin-bottom:1em;" class="container">
+    <div>
+        <span style="font-size: 2em; color: #32a5e7;">Athletes in our Collection</span>
+        <span style="float:right;">
+                <a class="btn btn-outline-success btn-lg" href="/eAthlete/athlete/new">Add a new Athlete</a>
+            </span>
+    </div>
+    <!-- Search panel -->
+    <form id="searchBookForm" method="get" action="/eAthlete/athlete/search">
+        <div style="margin-top:1em;" class="row">
+            <div class="col-md-12">
+                <div class="input-group">
+                    <!--                        <input type="text" class="form-control" id="searchString" name="searchString" placeholder="Enter a string to search for suppliers" th:value="${searchString}" autofocus />-->
+                    <div class="input-group-append">
+                        <button id="btnSubmit" type="submit" class="btn btn-outline-success">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div style="font-size: 1em">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">SSN Number</th>
+                <th scope="col">Full Name</th>
+                <th scope="col">Athlete Phone Number</th>
+                <th scope="col"> Birth Date</th>
+                <th scope="col">Medals Won</th>
+                <th scope="col">Salary</th>
+                <th scope="col">Date of Reg</th>
+                <th scope="col"> Email</th>
+                <th scope="col">&nbsp;</th>
+                <th scope="col">&nbsp;</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="athlete,iterStat : ${athletes}">
+                <!--th:onclick="@{document.location='/eMarket/supplier/edit/{supplierId}'(supplierId=${supplier.supplierId})}" -->
+                <th scope="row" th:text="${iterStat.count}"></th>
+                <td th:text="${athlete.ssn}"></td>
+                <td th:text="${athlete.fullName}"></td>
+                <td th:text="${athlete.phoneNumber}"></td>
+                <td th:text="${athlete.dateOfBirth}"></td>
+                <td th:text="${athlete.dateOfRegistration}"></td>
+                <td th:text="${athlete.monthlySalary}"></td>
+                <td th:text="${athlete.totalNumberOfModelsWon}"></td>
+                <td th:text="${athlete.emailAddress}"></td>
+
+
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="confirmDeleteBookModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-supplierNumber" id="exampleModalCenterTitle">Confirm Delete</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you wish to delete this supplier data?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p>&nbsp;</p>
+
+<!--    <footer class="footer">-->
+<!--        <div class="container">-->
+<!--            <span class="text-muted">O. Kalu : : : CS425-SWE</span>-->
+<!--            <span style="float:right;" class="text-muted">&copy; August 2019</span>-->
+<!--        </div>-->
+<!--    </footer>-->
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+</body>
+</html>
